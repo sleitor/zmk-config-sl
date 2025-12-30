@@ -1,0 +1,8 @@
+# This file generates the GitHub Actions matrix
+# For simple single keyboard builds, remove everything but your keyboard
+---
+include:
+  - board: nice_nano_v2
+    shield: souffle_v3_sweep_left
+  - board: nice_nano_v2
+    shield: souffle_v3_sweep_right

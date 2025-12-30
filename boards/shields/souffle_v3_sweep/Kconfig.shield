@@ -1,0 +1,5 @@
+config SHIELD_SOUFFLE_V3_SWEEP_LEFT
+    def_bool $(shields_list_contains,souffle_v3_sweep_left)
+
+config SHIELD_SOUFFLE_V3_SWEEP_RIGHT
+    def_bool $(shields_list_contains,souffle_v3_sweep_right)
