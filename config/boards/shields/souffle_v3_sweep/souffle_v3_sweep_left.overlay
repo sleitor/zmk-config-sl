@@ -8,9 +8,9 @@
 &kscan0 {
     col-gpios
         = <&gpio0 2  GPIO_ACTIVE_HIGH> // P0.02 - col0 (corrected - was mirrored)
-        , <&gpio0 15 GPIO_ACTIVE_HIGH> // P0.15 - col1
-        , <&gpio0 13 GPIO_ACTIVE_HIGH> // P0.13 - col2
-        , <&gpio0 11 GPIO_ACTIVE_HIGH> // P0.11 - col3
+        , <&gpio1 15 GPIO_ACTIVE_HIGH> // P1.15 - col1
+        , <&gpio1 13 GPIO_ACTIVE_HIGH> // P1.13 - col2
+        , <&gpio1 11 GPIO_ACTIVE_HIGH> // P1.11 - col3
         , <&gpio0 10 GPIO_ACTIVE_HIGH> // P0.10 - col4
         , <&gpio0 9  GPIO_ACTIVE_HIGH> // P0.09 - col5
         ;
