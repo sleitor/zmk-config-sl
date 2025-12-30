@@ -1,7 +1,7 @@
 if SHIELD_SOUFFLE_V3_SWEEP_LEFT
 
 config ZMK_KEYBOARD_NAME
-    default "Souffle v3 Sweep"
+    default "Souffle v3"
 
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
