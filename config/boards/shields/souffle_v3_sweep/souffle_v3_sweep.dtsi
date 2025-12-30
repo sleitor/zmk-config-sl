@@ -44,8 +44,7 @@
         compatible = "alps,ec11";
         a-gpios = <&gpio0 31 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // P0.31 - ENCA
         b-gpios = <&gpio0 29 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // P0.29 - ENCB
-        resolution = <4>;
-        steps = <20>;
+        resolution = <2>;
         status = "disabled";
     };
 
