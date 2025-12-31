@@ -5,5 +5,6 @@ include:
   - board: nice_nano
     shield: souffle_v3_sweep_left
     snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: nice_nano
     shield: souffle_v3_sweep_right
