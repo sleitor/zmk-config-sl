@@ -54,31 +54,31 @@
             , <&key_physical_attrs 100 100 1351  261       0     0     0>  // SEMI
             , <&key_physical_attrs 100 100 1451  261       0     0     0>  // SQT
             // Row 3 - bottom letter row (excludes encoder buttons which are in row 4 matrix)
-            , <&key_physical_attrs 100 100    0  361       0     0     0>  // LSHFT
-            , <&key_physical_attrs 100 100  100  361       0     0     0>  // Z
-            , <&key_physical_attrs 100 100  200  314       0     0     0>  // X
-            , <&key_physical_attrs 100 100  300  301       0     0     0>  // C
-            , <&key_physical_attrs 100 100  400  314       0     0     0>  // V
-            , <&key_physical_attrs 100 100  500  327       0     0     0>  // B
-            , <&key_physical_attrs 100 100  951  327       0     0     0>  // N
-            , <&key_physical_attrs 100 100 1051  314       0     0     0>  // M
-            , <&key_physical_attrs 100 100 1151  301       0     0     0>  // COMMA
-            , <&key_physical_attrs 100 100 1251  314       0     0     0>  // DOT
-            , <&key_physical_attrs 100 100 1351  361       0     0     0>  // FSLH
-            , <&key_physical_attrs 100 100 1451  361       0     0     0>  // RSHFT
+            , <&key_physical_attrs 100 100    0  361       0     0     0>  // LSHFT (col 0)
+            , <&key_physical_attrs 100 100  100  361       0     0     0>  // Z (col 1)
+            , <&key_physical_attrs 100 100  200  314       0     0     0>  // X (col 2)
+            , <&key_physical_attrs 100 100  300  301       0     0     0>  // C (col 3)
+            , <&key_physical_attrs 100 100  400  314       0     0     0>  // V (col 4)
+            , <&key_physical_attrs 100 100  500  327       0     0     0>  // B (col 5)
+            , <&key_physical_attrs 100 100  951  327       0     0     0>  // N (col 6)
+            , <&key_physical_attrs 100 100 1051  314       0     0     0>  // M (col 7)
+            , <&key_physical_attrs 100 100 1151  301       0     0     0>  // COMMA (col 8)
+            , <&key_physical_attrs 100 100 1251  314       0     0     0>  // DOT (col 9)
+            , <&key_physical_attrs 100 100 1351  361       0     0     0>  // FSLH (col 10)
+            , <&key_physical_attrs 100 100 1451  361       0     0     0>  // RSHFT (col 11)
             // Row 4 - thumb clusters (encoder buttons physically in row 3 area but electrically in row 4)
-            , <&key_physical_attrs 100 100    0  530       0     0     0>  // LALT (palm key left outer "/" slash key)
-            , <&key_physical_attrs 100 100  130  480       0     0     0>  // LGUI (Shft key)
-            , <&key_physical_attrs 100 100  230  490    2300   280   540>  // mo 1 (A/t key)
-            , <&key_physical_attrs 100 100  330  480    3000   380   530>  // SPACE (left) (G/U key)
-            , <&key_physical_attrs 100 100  430  470    3000   480   520>  // BSPC (BkSp key)
-            , <&key_physical_attrs 100 100  612  324       0     0     0>  // Left encoder button (phys row 3)
-            , <&key_physical_attrs 100 100  839  324       0     0     0>  // Right encoder button (phys row 3)
-            , <&key_physical_attrs 100 100 1020  470  (-3000) 1070   520>  // ENTER (Ret key)
-            , <&key_physical_attrs 100 100 1120  480  (-3000) 1170   530>  // SPACE (right) (- key)
-            , <&key_physical_attrs 100 100 1220  490  (-2300) 1270   540>  // mo 2 (blank key)
-            , <&key_physical_attrs 100 100 1320  480       0     0     0>  // RGUI (GUI key)
-            , <&key_physical_attrs 100 100 1451  530       0     0     0>  // RALT (palm key right outer "AltG")
+            , <&key_physical_attrs 100 100    0  461       0     0     0>  // LALT (palm key left) (col 0)
+            , <&key_physical_attrs 100 100  200  414       0     0     0>  // LGUI (col 1)
+            , <&key_physical_attrs 100 100  316  439    2300   366   489>  // mo 1 (col 2)
+            , <&key_physical_attrs 100 100  426  440    3000   476   515>  // SPACE left (col 3)
+            , <&key_physical_attrs 100 100  526  440    3000   576   515>  // BSPC (col 4)
+            , <&key_physical_attrs 100 100  612  324       0     0     0>  // Left encoder (col 5, phys row 3)
+            , <&key_physical_attrs 100 100  839  324       0     0     0>  // Right encoder (col 6, phys row 3)
+            , <&key_physical_attrs 100 100  926  440  (-3000)  976   515>  // ENTER (col 7)
+            , <&key_physical_attrs 100 100 1026  440  (-3000) 1076   515>  // SPACE right (col 8)
+            , <&key_physical_attrs 100 100 1136  439  (-2300) 1186   489>  // mo 2 (col 9)
+            , <&key_physical_attrs 100 100 1251  414       0     0     0>  // RGUI (col 10)
+            , <&key_physical_attrs 100 100 1451  461       0     0     0>  // RALT (palm key right) (col 11)
             ;
     };
 };
