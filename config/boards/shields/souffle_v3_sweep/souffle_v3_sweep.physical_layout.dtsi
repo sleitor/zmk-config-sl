@@ -68,16 +68,16 @@
             , <&key_physical_attrs 100 100 1451  361       0     0     0>  // RSHFT (col 11)
             // Row 4 - thumb clusters (encoder buttons physically in row 3 area but electrically in row 4)
             , <&key_physical_attrs 100 100    0  461       0     0     0>  // LALT (palm key left) (col 0)
-            , <&key_physical_attrs 100 100  200  414       0     0     0>  // LGUI (col 1)
-            , <&key_physical_attrs 100 100  316  439    2300   366   489>  // mo 1 (col 2)
-            , <&key_physical_attrs 100 100  426  440    3000   476   515>  // SPACE left (col 3)
-            , <&key_physical_attrs 100 100  526  440    3000   576   515>  // BSPC (col 4)
+            , <&key_physical_attrs 100 100  230  414       0     0     0>  // LGUI (col 1) - moved 30 right
+            , <&key_physical_attrs 100 100  346  439    2300   396   489>  // mo 1 (col 2) - moved 30 right
+            , <&key_physical_attrs 100 100  456  440    3000   506   515>  // SPACE left (col 3) - moved 30 right
+            , <&key_physical_attrs 100 100  546  440    3000   596   515>  // BSPC (col 4) - moved 20 right
             , <&key_physical_attrs 100 100  612  324       0     0     0>  // Left encoder (col 5, phys row 3)
             , <&key_physical_attrs 100 100  839  324       0     0     0>  // Right encoder (col 6, phys row 3)
-            , <&key_physical_attrs 100 100  926  440  (-3000)  976   515>  // ENTER (col 7)
-            , <&key_physical_attrs 100 100 1026  440  (-3000) 1076   515>  // SPACE right (col 8)
-            , <&key_physical_attrs 100 100 1136  439  (-2300) 1186   489>  // mo 2 (col 9)
-            , <&key_physical_attrs 100 100 1251  414       0     0     0>  // RGUI (col 10)
+            , <&key_physical_attrs 100 100  906  440  (-3000)  956   515>  // ENTER (col 7) - moved 20 left
+            , <&key_physical_attrs 100 100  996  440  (-3000) 1046   515>  // SPACE right (col 8) - moved 30 left
+            , <&key_physical_attrs 100 100 1106  439  (-2300) 1156   489>  // mo 2 (col 9) - moved 30 left
+            , <&key_physical_attrs 100 100 1221  414       0     0     0>  // RGUI (col 10) - moved 30 left
             , <&key_physical_attrs 100 100 1451  461       0     0     0>  // RALT (palm key right) (col 11)
             ;
     };
