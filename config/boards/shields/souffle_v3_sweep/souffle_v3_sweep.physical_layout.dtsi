@@ -67,18 +67,18 @@
             , <&key_physical_attrs 100 100 1351  361       0     0     0>  // FSLH
             , <&key_physical_attrs 100 100 1451  361       0     0     0>  // RSHFT
             // Row 4 - thumb clusters (encoder buttons physically in row 3 area but electrically in row 4)
-            , <&key_physical_attrs 100 100    0  461       0     0     0>  // LALT (palm key)
-            , <&key_physical_attrs 100 100  200  414       0     0     0>  // LGUI
-            , <&key_physical_attrs 100 100  316  439    2300   366   489>  // mo 1
-            , <&key_physical_attrs 100 100  426  440    3000   476   515>  // SPACE (left)
-            , <&key_physical_attrs 100 100  526  440    3000   576   515>  // BSPC
+            , <&key_physical_attrs 100 100    0  530       0     0     0>  // LALT (palm key left outer "/" slash key)
+            , <&key_physical_attrs 100 100  130  480       0     0     0>  // LGUI (Shft key)
+            , <&key_physical_attrs 100 100  230  490    2300   280   540>  // mo 1 (A/t key)
+            , <&key_physical_attrs 100 100  330  480    3000   380   530>  // SPACE (left) (G/U key)
+            , <&key_physical_attrs 100 100  430  470    3000   480   520>  // BSPC (BkSp key)
             , <&key_physical_attrs 100 100  612  324       0     0     0>  // Left encoder button (phys row 3)
             , <&key_physical_attrs 100 100  839  324       0     0     0>  // Right encoder button (phys row 3)
-            , <&key_physical_attrs 100 100  926  440  (-3000)  976   515>  // ENTER
-            , <&key_physical_attrs 100 100 1026  440  (-3000) 1076   515>  // SPACE (right)
-            , <&key_physical_attrs 100 100 1136  439  (-2300) 1186   489>  // mo 2
-            , <&key_physical_attrs 100 100 1251  414       0     0     0>  // RGUI
-            , <&key_physical_attrs 100 100 1451  461       0     0     0>  // RALT (palm key)
+            , <&key_physical_attrs 100 100 1020  470  (-3000) 1070   520>  // ENTER (Ret key)
+            , <&key_physical_attrs 100 100 1120  480  (-3000) 1170   530>  // SPACE (right) (- key)
+            , <&key_physical_attrs 100 100 1220  490  (-2300) 1270   540>  // mo 2 (blank key)
+            , <&key_physical_attrs 100 100 1320  480       0     0     0>  // RGUI (GUI key)
+            , <&key_physical_attrs 100 100 1451  530       0     0     0>  // RALT (palm key right outer "AltG")
             ;
     };
 };
