@@ -44,8 +44,8 @@
     left_encoder: left_encoder {
         compatible = "alps,ec11";
         label = "LEFT_ENCODER";
-        a-gpios = <&gpio0 31 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // P0.31 - ENCA
-        b-gpios = <&gpio0 29 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // P0.29 - ENCB
+        a-gpios = <&gpio0 29 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // P0.29 - ENCB (swapped)
+        b-gpios = <&gpio0 31 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // P0.31 - ENCA (swapped)
         steps = <80>;
         status = "disabled";
     };
