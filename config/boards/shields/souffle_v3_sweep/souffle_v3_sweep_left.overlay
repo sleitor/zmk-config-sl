@@ -33,8 +33,8 @@
 
     cs-gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>; // P1.01 for CS
 
-    nice_view_spi: ls011b7dh01@0 {
-        compatible = "sharp,ls011b7dh01";
+    nice_view_spi: ls011b7dh03@0 {
+        compatible = "sharp,ls011b7dh03";
         reg = <0>;
         spi-max-frequency = <1000000>;
         width = <160>;
