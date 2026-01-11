@@ -225,6 +225,7 @@ See `BUILD.md` for complete build instructions.
 - Moved keymap to proper location: `boards/shields/souffle_v3_sweep/souffle_v3_sweep.keymap`
 - **Eliminated deprecation warning** by using `-DBOARD_ROOT` instead of deprecated `-DZMK_CONFIG`
 - Updated all build documentation (BUILD.md, README.md) with modern build commands
+- Fixed display configuration warnings by adding `CONFIG_ZMK_DISPLAY_WORK_QUEUE_DEDICATED=y`
 
 **Old approach (deprecated):**
 ```bash
@@ -235,6 +236,10 @@ See `BUILD.md` for complete build instructions.
 ```bash
 -DBOARD_ROOT=/path/to/config
 ```
+
+**Display Configuration Fix:**
+- Added `CONFIG_ZMK_DISPLAY_WORK_QUEUE_DEDICATED=y` (required dependency for stack size setting)
+- This eliminates the warning: "ZMK_DISPLAY_DEDICATED_THREAD_STACK_SIZE ... was assigned the value '4096' but got the value ''"
 
 ### ⚠️ LVGL Display Issue (2026-01-11)
 **Current Status:**
@@ -281,8 +286,9 @@ LVGL initialization may have timing or compatibility issues with generic Pro Mic
 - **Module structure required**: Must create `zephyr/module.yml` and `.zmk.yml` files
 - **CS polarity critical**: ACTIVE_HIGH works for this hardware, ACTIVE_LOW completely breaks display
 - **LVGL incompatibility**: Generic Pro Micro boards may not be fully compatible with LVGL framework
-- **Stack size not the issue**: Even with proper 4096 stack size, LVGL won't boot
+- **Stack size requires work queue**: Must enable `CONFIG_ZMK_DISPLAY_WORK_QUEUE_DEDICATED=y` before setting stack size
 - **Basic display is reliable**: Low-level display driver works perfectly without LVGL overhead
+- **KSCAN deprecation expected**: Warning "Deprecated symbol KSCAN is enabled" is normal - ZMK is transitioning to Zephyr's matrix input API but migration isn't complete yet (planned for Zephyr 4.3)
 
 ## Current Status Summary
 
