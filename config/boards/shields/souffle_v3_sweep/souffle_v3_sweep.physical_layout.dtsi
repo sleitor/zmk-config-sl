@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  *
  * Physical layout for Soufflé V3 Sweep
- * 6x5 column-staggered split keyboard (60 keys total)
+ * 6x5 column-staggered split keyboard (60 keys total including 2 encoder buttons)
  */
 
 / {
@@ -53,32 +53,32 @@
             , <&key_physical_attrs 100 100 1251  214       0     0     0>  // L
             , <&key_physical_attrs 100 100 1351  261       0     0     0>  // SEMI
             , <&key_physical_attrs 100 100 1451  261       0     0     0>  // SQT
-            // Row 3 - bottom letter row (excludes encoder buttons which are in row 4 matrix)
-            , <&key_physical_attrs 100 100    0  361       0     0     0>  // LSHFT (col 0)
-            , <&key_physical_attrs 100 100  100  361       0     0     0>  // Z (col 1)
-            , <&key_physical_attrs 100 100  200  314       0     0     0>  // X (col 2)
-            , <&key_physical_attrs 100 100  300  301       0     0     0>  // C (col 3)
-            , <&key_physical_attrs 100 100  400  314       0     0     0>  // V (col 4)
-            , <&key_physical_attrs 100 100  500  327       0     0     0>  // B (col 5)
-            , <&key_physical_attrs 100 100  951  327       0     0     0>  // N (col 6)
-            , <&key_physical_attrs 100 100 1051  314       0     0     0>  // M (col 7)
-            , <&key_physical_attrs 100 100 1151  301       0     0     0>  // COMMA (col 8)
-            , <&key_physical_attrs 100 100 1251  314       0     0     0>  // DOT (col 9)
-            , <&key_physical_attrs 100 100 1351  361       0     0     0>  // FSLH (col 10)
-            , <&key_physical_attrs 100 100 1451  361       0     0     0>  // RSHFT (col 11)
-            // Row 4 - thumb clusters (encoder buttons physically in row 3 area but electrically in row 4)
-            , <&key_physical_attrs 100 100    0  461       0     0     0>  // LALT (palm key left) (col 0)
-            , <&key_physical_attrs 100 100  230  414       0     0     0>  // LGUI (col 1) - moved 30 right
-            , <&key_physical_attrs 100 100  346  439    2300   396   489>  // mo 1 (col 2) - moved 30 right
-            , <&key_physical_attrs 100 100  456  440    3000   506   515>  // SPACE left (col 3) - moved 30 right
-            , <&key_physical_attrs 100 100  566  440    3000   616   515>  // BSPC (col 4) - moved 40 right total
-            , <&key_physical_attrs 100 100  612  324       0     0     0>  // Left encoder (col 5, phys row 3)
-            , <&key_physical_attrs 100 100  839  324       0     0     0>  // Right encoder (col 6, phys row 3)
-            , <&key_physical_attrs 100 100  886  440  (-3000)  936   515>  // ENTER (col 7) - moved 40 left total
-            , <&key_physical_attrs 100 100  996  440  (-3000) 1046   515>  // SPACE right (col 8) - moved 30 left
-            , <&key_physical_attrs 100 100 1106  439  (-2300) 1156   489>  // mo 2 (col 9) - moved 30 left
-            , <&key_physical_attrs 100 100 1221  414       0     0     0>  // RGUI (col 10) - moved 30 left
-            , <&key_physical_attrs 100 100 1451  461       0     0     0>  // RALT (palm key right) (col 11)
+            // Row 3 - bottom letter row WITH encoder buttons in the middle (matching keymap order)
+            , <&key_physical_attrs 100 100    0  361       0     0     0>  // LSHFT
+            , <&key_physical_attrs 100 100  100  361       0     0     0>  // Z
+            , <&key_physical_attrs 100 100  200  314       0     0     0>  // X
+            , <&key_physical_attrs 100 100  300  301       0     0     0>  // C
+            , <&key_physical_attrs 100 100  400  314       0     0     0>  // V
+            , <&key_physical_attrs 100 100  500  327       0     0     0>  // B
+            , <&key_physical_attrs 100 100  612  324       0     0     0>  // Left encoder
+            , <&key_physical_attrs 100 100  839  324       0     0     0>  // Right encoder
+            , <&key_physical_attrs 100 100  951  327       0     0     0>  // N
+            , <&key_physical_attrs 100 100 1051  314       0     0     0>  // M
+            , <&key_physical_attrs 100 100 1151  301       0     0     0>  // COMMA
+            , <&key_physical_attrs 100 100 1251  314       0     0     0>  // DOT
+            , <&key_physical_attrs 100 100 1351  361       0     0     0>  // FSLH
+            , <&key_physical_attrs 100 100 1451  361       0     0     0>  // RSHFT
+            // Row 4 - thumb clusters (10 keys, no encoders)
+            , <&key_physical_attrs 100 100    0  461       0     0     0>  // LALT (palm key left)
+            , <&key_physical_attrs 100 100  230  414       0     0     0>  // LGUI
+            , <&key_physical_attrs 100 100  346  439    2300   396   489>  // mo 1
+            , <&key_physical_attrs 100 100  456  440    3000   506   515>  // SPACE left
+            , <&key_physical_attrs 100 100  566  440    3000   616   515>  // BSPC
+            , <&key_physical_attrs 100 100  886  440  (-3000)  936   515>  // ENTER
+            , <&key_physical_attrs 100 100  996  440  (-3000) 1046   515>  // SPACE right
+            , <&key_physical_attrs 100 100 1106  439  (-2300) 1156   489>  // mo 2
+            , <&key_physical_attrs 100 100 1221  414       0     0     0>  // RGUI
+            , <&key_physical_attrs 100 100 1451  461       0     0     0>  // RALT (palm key right)
             ;
     };
 };

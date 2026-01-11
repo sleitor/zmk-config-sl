@@ -12,21 +12,18 @@ This is a ZMK firmware configuration for the Soufflé v3 Sweep split keyboard wi
 Push changes to trigger automatic build via GitHub Actions. Firmware artifacts are available in the Actions tab.
 
 ### Local Build
+
 ```bash
-# Build left half
-west build -d build/left -b nice_nano_v2 -- \
-  -DBOARD_ROOT=/path/to/zmk-config-sl/config \
-  -DSHIELD=souffle_v3_sweep_left
+cd /Users/sleitor/Projects/pet_projects/zmk-workspace
 
-# Build right half
-west build -d build/right -b nice_nano_v2 -- \
-  -DBOARD_ROOT=/path/to/zmk-config-sl/config \
-  -DSHIELD=souffle_v3_sweep_right
+# Build left half (with nice-view-gem and ZMK Studio)
+ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb GNUARMEMB_TOOLCHAIN_PATH=/opt/homebrew west build --pristine -d build/left -s zmk/app -b nice_nano -- -DSHIELD="souffle_v3_sweep_left nice_view_gem" -DZMK_EXTRA_MODULES="/Users/sleitor/Projects/pet_projects/zmk-config-sl/config;/Users/sleitor/Projects/pet_projects/zmk-workspace/modules/nice-view-gem" -DSNIPPET="studio-rpc-usb-uart"
+
+# Build right half (with nice-view-gem)
+ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb GNUARMEMB_TOOLCHAIN_PATH=/opt/homebrew west build --pristine -d build/right -s zmk/app -b nice_nano -- -DSHIELD="souffle_v3_sweep_right nice_view_gem" -DZMK_EXTRA_MODULES="/Users/sleitor/Projects/pet_projects/zmk-config-sl/config;/Users/sleitor/Projects/pet_projects/zmk-workspace/modules/nice-view-gem"
+
+# Output: build/left/zephyr/zmk.uf2 and build/right/zephyr/zmk.uf2
 ```
-
-Requirements: ZMK development environment installed (see https://zmk.dev/docs/development/setup)
-
-**Note**: This repository uses the modern ZMK module system with `-DBOARD_ROOT` (not the deprecated `-DZMK_CONFIG`)
 
 ## Architecture
 
