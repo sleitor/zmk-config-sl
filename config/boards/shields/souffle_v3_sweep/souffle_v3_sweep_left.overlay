@@ -7,34 +7,36 @@
 #include <dt-bindings/led/led.h>
 
 &pinctrl {
-    spi1_default: spi1_default {
+    spi0_default: spi0_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 17)>,
-                    <NRF_PSEL(SPIM_SCK, 0, 20)>;
+            psels = <NRF_PSEL(SPIM_SCK, 0, 20)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 17)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 25)>;
         };
     };
 
-    spi1_sleep: spi1_sleep {
+    spi0_sleep: spi0_sleep {
         group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 17)>,
-                    <NRF_PSEL(SPIM_SCK, 0, 20)>;
+            psels = <NRF_PSEL(SPIM_SCK, 0, 20)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 17)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 25)>;
             low-power-enable;
         };
     };
 };
 
-&spi1 {
+&spi0 {
     compatible = "nordic,nrf-spim";
     status = "okay";
 
-    pinctrl-0 = <&spi1_default>;
-    pinctrl-1 = <&spi1_sleep>;
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
 
-    cs-gpios = <&gpio1 1 GPIO_ACTIVE_LOW>; // P1.01 for CS
+    cs-gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>; // P1.01 for CS
 
-    nice_view_spi: ls0xx@0 {
-        compatible = "sharp,ls0xx";
+    nice_view_display: ls0xx@0 {
+        compatible = "sharp,ls0xx"; // Sharp LS011B7DH03
         reg = <0>;
         spi-max-frequency = <1000000>;
         width = <160>;
@@ -42,9 +44,13 @@
     };
 };
 
+&pro_micro_i2c {
+    status = "disabled";
+};
+
 / {
     chosen {
-        zephyr,display = &nice_view_spi;
+        zephyr,display = &nice_view_display;
     };
 };
 
