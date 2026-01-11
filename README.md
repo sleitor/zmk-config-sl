@@ -53,7 +53,7 @@ Navigate to your ZMK workspace directory and run:
 **Left side (with display and widgets):**
 ```bash
 python3.12 -m west build -s zmk/app -d build/left -b nice_nano -p -- \
-  -DZMK_CONFIG=/path/to/zmk-config-sl/config \
+  -DBOARD_ROOT=/path/to/zmk-config-sl/config \
   -DSHIELD=souffle_v3_sweep_left \
   -DZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb \
   -DGNUARMEMB_TOOLCHAIN_PATH=/opt/homebrew \
@@ -67,7 +67,7 @@ python3.12 -m west build -s zmk/app -d build/left -b nice_nano -p -- \
 **Right side (with display and widgets):**
 ```bash
 python3.12 -m west build -s zmk/app -d build/right -b nice_nano -p -- \
-  -DZMK_CONFIG=/path/to/zmk-config-sl/config \
+  -DBOARD_ROOT=/path/to/zmk-config-sl/config \
   -DSHIELD=souffle_v3_sweep_right \
   -DZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb \
   -DGNUARMEMB_TOOLCHAIN_PATH=/opt/homebrew \

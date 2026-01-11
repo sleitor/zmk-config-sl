@@ -1,5 +1,5 @@
 # ZMK Configuration Session Notes
-**Date:** 2026-01-10 (Display troubleshooting and build documentation)
+**Last Updated:** 2026-01-11 (Module migration and LVGL troubleshooting)
 
 ## Completed Work
 
@@ -88,15 +88,22 @@
 
 ```
 config/
-├── info.json                                      # Keymap-editor layout
-├── souffle_v3_sweep.keymap                       # Key bindings
+├── zephyr/
+│   └── module.yml                                 # Module declaration
 ├── boards/shields/souffle_v3_sweep/
+│   ├── souffle_v3_sweep.keymap                   # Key bindings (modern location)
+│   ├── souffle_v3_sweep.zmk.yml                  # Shield metadata
 │   ├── souffle_v3_sweep.conf                     # Main config
 │   ├── souffle_v3_sweep_left.conf                # Left side config
+│   ├── souffle_v3_sweep_right.conf               # Right side config
 │   ├── souffle_v3_sweep.dtsi                     # Matrix transform
 │   ├── souffle_v3_sweep.physical_layout.dtsi     # Physical layout for Studio
 │   ├── souffle_v3_sweep_left.overlay             # Left hardware (display, pins)
-│   └── souffle_v3_sweep_right.overlay            # Right hardware (display, pins)
+│   ├── souffle_v3_sweep_right.overlay            # Right hardware (display, pins)
+│   ├── Kconfig.shield                            # Shield flags
+│   └── Kconfig.defconfig                         # Default config
+├── info.json                                      # Keymap-editor layout
+└── west.yml                                       # West manifest
 build.yaml                                         # Build configuration
 README.md                                          # Full documentation
 BUILD.md                                           # Quick build reference
@@ -153,23 +160,33 @@ See `BUILD.md` for complete build instructions.
 
 ## Next Steps / TODO
 
-1. **✨ PRIORITY: Test display firmware** (2026-01-10)
-   - Flash `souffle_v3_sweep_left_DISPLAY_WITH_WIDGETS.uf2` to left controller
-   - Flash `souffle_v3_sweep_right_DISPLAY_WITH_WIDGETS.uf2` to right controller
-   - Verify displays clear the random dots and show widgets
-   - If issues persist, try firmware without widgets (basic display only)
+1. **✅ COMPLETED: Display basic driver working**
+   - Basic display successfully clears random dots
+   - 466KB firmware boots reliably
+   - SPI communication verified functional
 
-2. **Fix physical layout positions for row 4 (thumb cluster)**
+2. **⚠️ BLOCKED: LVGL widget display**
+   - LVGL framework won't boot on generic Pro Micro boards
+   - Tried all known configuration fixes (stack size, blank config, etc.)
+   - May require official nice!nano hardware or custom display implementation
+   - **User decision needed**: Accept basic display or pursue alternatives
+
+3. **Fix physical layout positions for row 4 (thumb cluster)**
    - Currently keys overlap with row 3 in ZMK Studio
    - Need to adjust X/Y coordinates in `souffle_v3_sweep.physical_layout.dtsi`
    - Possibly adjust rotation angles for better visual representation
 
-3. **Test with right side connected**
-   - Verify split communication works
-   - Test right encoder functionality
-   - Confirm both displays work simultaneously
+4. **Build right side firmware with basic display**
+   - Create matching basic display firmware for right side
+   - Test both displays working simultaneously
+   - Verify split communication
 
-4. **Optional: Adapt for nickcoutsos/keymap-editor**
+5. **Optional: Custom display implementation**
+   - Write lightweight text rendering without LVGL
+   - Display layer number and battery percentage
+   - Avoid LVGL overhead that causes boot issues
+
+6. **Optional: Adapt for nickcoutsos/keymap-editor**
    - Basic support added via info.json
    - May need layout refinement
 
@@ -199,3 +216,134 @@ See `BUILD.md` for complete build instructions.
 - **I2C conflicts**: Disable `pro_micro_i2c` when using SPI displays
 - **Build toolchain**: Use `-DZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb` if Zephyr SDK not installed
 - **Firmware size**: With LVGL enabled, firmware is ~700KB (vs ~450KB without)
+
+### ✅ Module System Migration (2026-01-11)
+**Successfully migrated to modern ZMK module structure**
+
+- Created `config/zephyr/module.yml` - Declares repository as ZMK keyboard module
+- Created `souffle_v3_sweep.zmk.yml` - Shield metadata with features and dependencies
+- Moved keymap to proper location: `boards/shields/souffle_v3_sweep/souffle_v3_sweep.keymap`
+- **Eliminated deprecation warning** by using `-DBOARD_ROOT` instead of deprecated `-DZMK_CONFIG`
+- Updated all build documentation (BUILD.md, README.md) with modern build commands
+
+**Old approach (deprecated):**
+```bash
+-DZMK_CONFIG=/path/to/config
+```
+
+**New approach (modern):**
+```bash
+-DBOARD_ROOT=/path/to/config
+```
+
+### ⚠️ LVGL Display Issue (2026-01-11)
+**Current Status:**
+- ✅ **Basic display driver works perfectly** (466KB firmware)
+  - Clears random dots successfully
+  - Display initializes correctly
+  - SPI communication functional
+- ❌ **LVGL/ZMK_DISPLAY firmware won't boot** (701KB firmware)
+  - Firmware builds successfully
+  - Device won't boot - stays frozen
+  - No response after flashing
+
+**What was tried:**
+1. Added `CONFIG_ZMK_DISPLAY_DEDICATED_THREAD_STACK_SIZE=4096` (from official nice_view config)
+2. Added `CONFIG_ZMK_DISPLAY_BLANK_ON_IDLE=n`
+3. Tested CS pin polarity (ACTIVE_HIGH works, ACTIVE_LOW breaks everything)
+4. Removed USB logging to reduce firmware size (no change)
+5. Disabled individual widgets to reduce size (still won't boot)
+6. Verified devicetree configuration matches official nice_view exactly
+
+**Technical Details:**
+- Display: Sharp LS011B7DH03 (160×68) via SPI0
+- Pin Configuration: MOSI=P0.17, SCK=P0.20, CS=P1.01 (ACTIVE_HIGH)
+- Hardware: Generic "v1940 Pro Micro nRF52840" controllers (not official nice!nano)
+- ZMK Version: Latest main branch (commit 19582174, Jan 8 2026)
+- Zephyr Version: v4.1.0+zmk-fixes (latest ZMK fork)
+- Memory Usage: FLASH 44.20%, RAM 24.39% (plenty of room)
+
+**Hypothesis:**
+LVGL initialization may have timing or compatibility issues with generic Pro Micro nRF52840 boards that differ from official nice!nano boards. The basic display driver works perfectly, suggesting hardware is functional but LVGL framework specifically has issues.
+
+**Available Firmware Files:**
+- `souffle_v3_sweep_left_BASIC_DISPLAY_FIXED.uf2` (466KB) - ✅ **WORKING**
+  - Basic display driver only
+  - Clears screen successfully
+  - No widgets
+- `souffle_v3_sweep_left_WITH_WIDGETS.uf2` (701KB) - ❌ Won't boot
+  - Full LVGL framework
+  - All widgets enabled
+  - Device freezes on boot
+
+### Display Troubleshooting Lessons - Additional (2026-01-11)
+- **Deprecation warning avoidable**: Use `-DBOARD_ROOT` instead of `-DZMK_CONFIG`
+- **Module structure required**: Must create `zephyr/module.yml` and `.zmk.yml` files
+- **CS polarity critical**: ACTIVE_HIGH works for this hardware, ACTIVE_LOW completely breaks display
+- **LVGL incompatibility**: Generic Pro Micro boards may not be fully compatible with LVGL framework
+- **Stack size not the issue**: Even with proper 4096 stack size, LVGL won't boot
+- **Basic display is reliable**: Low-level display driver works perfectly without LVGL overhead
+
+## Current Status Summary
+
+### Working Features ✅
+- All 60 keys functional
+- Encoder rotation on both sides
+- Encoder buttons (C_MUTE left, C_PP right)
+- Basic display driver (clears screen, no widgets)
+- Modern module structure (no deprecation warnings)
+- Proper devicetree configuration
+- SPI communication verified working
+
+### Known Limitations ⚠️
+1. **Display widgets not available**
+   - LVGL/ZMK_DISPLAY firmware won't boot on generic Pro Micro boards
+   - Basic display clears screen but shows no layer/battery/output info
+   - Likely hardware-specific incompatibility with LVGL framework
+
+2. **Physical layout thumb cluster positions**
+   - Row 4 keys positioned incorrectly in ZMK Studio visual
+   - Functional but needs coordinate adjustments
+
+### Firmware Recommendations
+
+**For reliable operation:**
+```bash
+# Left side - basic display
+souffle_v3_sweep_left_BASIC_DISPLAY_FIXED.uf2 (466KB)
+```
+
+**Configuration that works:**
+- CONFIG_SPI=y
+- CONFIG_DISPLAY=y  
+- CONFIG_LS0XX=y
+- CONFIG_ZMK_EXT_POWER=y
+- NO CONFIG_ZMK_DISPLAY (causes boot failure)
+- NO CONFIG_LVGL (causes boot failure)
+
+**To re-enable widgets (if hardware compatible):**
+Add back to .conf files:
+```
+CONFIG_ZMK_DISPLAY=y
+CONFIG_ZMK_DISPLAY_BLANK_ON_IDLE=n
+CONFIG_ZMK_DISPLAY_DEDICATED_THREAD_STACK_SIZE=4096
+CONFIG_ZMK_WIDGET_LAYER_STATUS=y
+CONFIG_ZMK_WIDGET_BATTERY_STATUS=y
+CONFIG_ZMK_WIDGET_OUTPUT_STATUS=y
+CONFIG_ZMK_WIDGET_WPM_STATUS=y
+```
+
+## Future Options
+
+1. **Accept current solution**: Basic display clears screen, keyboard fully functional
+2. **Custom display code**: Write lightweight text rendering without LVGL framework  
+3. **Test with official nice!nano**: See if LVGL works on official hardware
+4. **Investigate LVGL alternatives**: Look for lighter display frameworks in Zephyr
+
+## Version Information
+
+- **ZMK**: commit 19582174 (Jan 8, 2026) - Latest main
+- **Zephyr**: v4.1.0+zmk-fixes - Current ZMK fork with keyboard patches
+- **Build System**: Using modern `-DBOARD_ROOT` method (no deprecation warnings)
+- **Display Driver**: Sharp LS0XX generic driver (works perfectly)
+- **LVGL**: Version 9.3.0 (won't boot on generic hardware)

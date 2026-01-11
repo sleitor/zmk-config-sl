@@ -14,19 +14,29 @@ Push changes to trigger automatic build via GitHub Actions. Firmware artifacts a
 ### Local Build
 ```bash
 # Build left half
-west build -d build/left -b nice_nano_v2 -- -DSHIELD=souffle_v3_sweep_left
+west build -d build/left -b nice_nano_v2 -- \
+  -DBOARD_ROOT=/path/to/zmk-config-sl/config \
+  -DSHIELD=souffle_v3_sweep_left
 
 # Build right half
-west build -d build/right -b nice_nano_v2 -- -DSHIELD=souffle_v3_sweep_right
+west build -d build/right -b nice_nano_v2 -- \
+  -DBOARD_ROOT=/path/to/zmk-config-sl/config \
+  -DSHIELD=souffle_v3_sweep_right
 ```
 
 Requirements: ZMK development environment installed (see https://zmk.dev/docs/development/setup)
+
+**Note**: This repository uses the modern ZMK module system with `-DBOARD_ROOT` (not the deprecated `-DZMK_CONFIG`)
 
 ## Architecture
 
 ### File Structure
 
-**Keymap**: `config/souffle_v3_sweep.keymap`
+**Module System**:
+- `config/zephyr/module.yml`: Declares this repo as a ZMK keyboard module
+- `config/boards/shields/souffle_v3_sweep/souffle_v3_sweep.zmk.yml`: Shield metadata
+
+**Keymap**: `config/boards/shields/souffle_v3_sweep/souffle_v3_sweep.keymap`
 - Main keymap configuration with layer definitions
 - Contains 4 layers: Base, Lower (symbols), Raise (numbers/nav/BT), and an empty Layer 3
 - Encoder bindings defined per layer
@@ -36,7 +46,9 @@ Requirements: ZMK development environment installed (see https://zmk.dev/docs/de
 - `souffle_v3_sweep_left.overlay` / `souffle_v3_sweep_right.overlay`: Side-specific pin mappings and display configuration
 - `souffle_v3_sweep.conf`: Feature configuration (encoders, displays, BT power, sleep, ZMK Studio)
 - `souffle_v3_sweep.physical_layout.dtsi`: Physical layout for ZMK Studio
-- `info.json`: Keyboard metadata and layout positions for visual editors
+
+**Visual Editor Support**:
+- `config/info.json`: Keyboard metadata and layout positions for keymap-editor
 
 ### Hardware Configuration
 
@@ -51,9 +63,10 @@ Requirements: ZMK development environment installed (see https://zmk.dev/docs/de
 - Configured in `souffle_v3_sweep.dtsi`, enabled per-side in overlay files
 
 **Display (nice!view)**:
-- SPI1 interface: MOSI on P0.17, SCK on P0.20, CS on P1.01
+- SPI0 interface: MOSI on P0.17, SCK on P0.20, CS on P1.01
 - Sharp LS011B7DH03 (160×68)
-- Configured only in left/right overlay files
+- Configured in left/right overlay files
+- Both sides have displays
 
 ### Build Matrix
 
@@ -73,7 +86,7 @@ Requirements: ZMK development environment installed (see https://zmk.dev/docs/de
 ## Common Modifications
 
 ### Changing Keymap
-Edit `config/souffle_v3_sweep.keymap`. Each layer's `bindings` array must have exactly 62 key positions matching the matrix transform. Encoder behavior defined in `sensor-bindings`.
+Edit `config/boards/shields/souffle_v3_sweep/souffle_v3_sweep.keymap`. Each layer's `bindings` array must have exactly 62 key positions matching the matrix transform. Encoder behavior defined in `sensor-bindings`.
 
 ### Adjusting Pin Mappings
 If PCB pins differ from defaults, modify:
@@ -81,7 +94,7 @@ If PCB pins differ from defaults, modify:
 - Encoder pins in `souffle_v3_sweep.dtsi` (a-gpios, b-gpios)
 
 ### Display Configuration
-Display settings in left/right overlay files under `&spi1` and `nice_view_spi` nodes.
+Display settings in left/right overlay files under `&spi0` and `nice_view_display` nodes.
 
 ### Feature Toggles
 Modify `souffle_v3_sweep.conf` to enable/disable:

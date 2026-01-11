@@ -1,0 +1,13 @@
+file_format: "1"
+id: souffle_v3_sweep
+name: Soufflé v3 Sweep
+type: shield
+url: https://github.com/climent/SouffleKeyboard
+requires: [pro_micro]
+features:
+  - keys
+  - display
+  - encoder
+siblings:
+  - souffle_v3_sweep_left
+  - souffle_v3_sweep_right

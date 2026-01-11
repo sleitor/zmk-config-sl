@@ -26,7 +26,7 @@ west update
 cd ~/Projects/zmk-workspace
 
 python3.12 -m west build -s zmk/app -d build/left -b nice_nano -p -- \
-  -DZMK_CONFIG=~/Projects/zmk-config-sl/config \
+  -DBOARD_ROOT=~/Projects/zmk-config-sl/config \
   -DSHIELD=souffle_v3_sweep_left \
   -DZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb \
   -DGNUARMEMB_TOOLCHAIN_PATH=/opt/homebrew \
@@ -45,7 +45,7 @@ Output: `build/left/zephyr/zmk.uf2`
 cd ~/Projects/zmk-workspace
 
 python3.12 -m west build -s zmk/app -d build/right -b nice_nano -p -- \
-  -DZMK_CONFIG=~/Projects/zmk-config-sl/config \
+  -DBOARD_ROOT=~/Projects/zmk-config-sl/config \
   -DSHIELD=souffle_v3_sweep_right \
   -DZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb \
   -DGNUARMEMB_TOOLCHAIN_PATH=/opt/homebrew \
@@ -65,7 +65,7 @@ If the display shows issues, try building without ZMK widgets:
 ```bash
 # Left (basic display only)
 python3.12 -m west build -s zmk/app -d build/left -b nice_nano -p -- \
-  -DZMK_CONFIG=~/Projects/zmk-config-sl/config \
+  -DBOARD_ROOT=~/Projects/zmk-config-sl/config \
   -DSHIELD=souffle_v3_sweep_left \
   -DZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb \
   -DGNUARMEMB_TOOLCHAIN_PATH=/opt/homebrew \
@@ -75,7 +75,7 @@ python3.12 -m west build -s zmk/app -d build/left -b nice_nano -p -- \
 
 # Right (basic display only)
 python3.12 -m west build -s zmk/app -d build/right -b nice_nano -p -- \
-  -DZMK_CONFIG=~/Projects/zmk-config-sl/config \
+  -DBOARD_ROOT=~/Projects/zmk-config-sl/config \
   -DSHIELD=souffle_v3_sweep_right \
   -DZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb \
   -DGNUARMEMB_TOOLCHAIN_PATH=/opt/homebrew \
